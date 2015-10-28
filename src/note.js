@@ -1,5 +1,10 @@
+const constructorEnforcer = Symbol();
+
 export default class Note {
-    constructor(number) {
+    constructor(enforcer, number) {
+        if (enforcer !== constructorEnforcer) {
+            throw 'Cannot call constructor of Note';
+        }
         this._number = number;
     }
 
@@ -8,78 +13,78 @@ export default class Note {
     }
 
     static get C() {
-        return new Note(0);
+        return new Note(constructorEnforcer, 0);
     }
 
     static get CS() {
-        return new Note(1);
+        return new Note(constructorEnforcer, 1);
     }
 
     static get DF() {
-        return new Note(1);
+        return new Note(constructorEnforcer, 1);
     }
 
     static get D() {
-        return new Note(2);
+        return new Note(constructorEnforcer, 2);
     }
 
     static get DS() {
-        return new Note(3);
+        return new Note(constructorEnforcer, 3);
     }
 
     static get EF() {
-        return new Note(3);
+        return new Note(constructorEnforcer, 3);
     }
 
     static get E() {
-        return new Note(4);
+        return new Note(constructorEnforcer, 4);
     }
 
     static get FF() {
-        return new Note(4);
+        return new Note(constructorEnforcer, 4);
     }
 
     static get F() {
-        return new Note(5);
+        return new Note(constructorEnforcer, 5);
     }
 
     static get FS() {
-        return new Note(6);
+        return new Note(constructorEnforcer, 6);
     }
 
     static get GF() {
-        return new Note(6);
+        return new Note(constructorEnforcer, 6);
     }
 
     static get G() {
-        return new Note(7);
+        return new Note(constructorEnforcer, 7);
     }
 
     static get GS() {
-        return new Note(8);
+        return new Note(constructorEnforcer, 8);
     }
 
     static get AF() {
-        return new Note(8);
+        return new Note(constructorEnforcer, 8);
     }
 
     static get A() {
-        return new Note(9);
+        return new Note(constructorEnforcer, 9);
     }
 
     static get AS() {
-        return new Note(10);
+        return new Note(constructorEnforcer, 10);
     }
 
     static get BF() {
-        return new Note(10);
+        return new Note(constructorEnforcer, 10);
     }
 
     static get B() {
-        return new Note(11);
+        return new Note(constructorEnforcer, 11);
     }
 
     static get CF() {
-        return new Note(11);
+        return new Note(constructorEnforcer, 11);
     }
 }

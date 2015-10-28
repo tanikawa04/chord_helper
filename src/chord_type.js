@@ -1,5 +1,10 @@
+const constructorEnforcer = Symbol();
+
 export default class ChordType {
-    constructor(semitones) {
+    constructor(enforcer, semitones) {
+        if (enforcer !== constructorEnforcer) {
+            throw 'Cannot call constructor of ChordType';
+        }
         this._semitones = semitones;
     }
 
@@ -8,70 +13,70 @@ export default class ChordType {
     }
 
     static get MAJOR() {
-        return new ChordType([0, 4, 7]);
+        return new ChordType(constructorEnforcer, [0, 4, 7]);
     }
 
     static get SUSPENDED_FOURTH() {
-        return new ChordType([0, 5, 7]);
+        return new ChordType(constructorEnforcer, [0, 5, 7]);
     }
 
     static get AUGUMENT() {
-        return new ChordType([0, 4, 8]);
+        return new ChordType(constructorEnforcer, [0, 4, 8]);
     }
 
     static get MINOR() {
-        return new ChordType([0, 3, 7]);
+        return new ChordType(constructorEnforcer, [0, 3, 7]);
     }
 
     static get DIMINISH() {
-        return new ChordType([0, 3, 6]);
+        return new ChordType(constructorEnforcer, [0, 3, 6]);
     }
 
     static get MAJOR_SEVENTH() {
-        return new ChordType([0, 4, 7, 11]);
+        return new ChordType(constructorEnforcer, [0, 4, 7, 11]);
     }
 
     static get SEVENTH() {
-        return new ChordType([0, 4, 7, 10]);
+        return new ChordType(constructorEnforcer, [0, 4, 7, 10]);
     }
 
     static get SEVENTH_SUSPENDED_FOURTH() {
-        return new ChordType([0, 5, 7, 10]);
+        return new ChordType(constructorEnforcer, [0, 5, 7, 10]);
     }
 
     static get ADD_NINTH() {
-        return new ChordType([0, 4, 7, 14]);
+        return new ChordType(constructorEnforcer, [0, 4, 7, 14]);
     }
 
     static get SIXTH() {
-        return new ChordType([0, 4, 7, 9]);
+        return new ChordType(constructorEnforcer, [0, 4, 7, 9]);
     }
 
     static get AUGUMENT_SEVENTH() {
-        return new ChordType([0, 4, 8, 10]);
+        return new ChordType(constructorEnforcer, [0, 4, 8, 10]);
     }
 
     static get MINOR_SEVENTH() {
-        return new ChordType([0, 3, 7, 10]);
+        return new ChordType(constructorEnforcer, [0, 3, 7, 10]);
     }
 
     static get MINOR_MAJOR_SEVENTH() {
-        return new ChordType([0, 3, 7, 11]);
+        return new ChordType(constructorEnforcer, [0, 3, 7, 11]);
     }
 
     static get MINOR_ADD_NINTH() {
-        return new ChordType([0, 3, 7, 14]);
+        return new ChordType(constructorEnforcer, [0, 3, 7, 14]);
     }
 
     static get MINOR_SIXTH() {
-        return new ChordType([0, 3, 7, 9]);
+        return new ChordType(constructorEnforcer, [0, 3, 7, 9]);
     }
 
     static get HALF_DIMINISH() {
-        return new ChordType([0, 3, 6, 10]);
+        return new ChordType(constructorEnforcer, [0, 3, 6, 10]);
     }
 
     static get DIMINISH_SEVENTH() {
-        return new ChordType([0, 3, 6, 9]);
+        return new ChordType(constructorEnforcer, [0, 3, 6, 9]);
     }
 }
