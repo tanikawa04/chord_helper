@@ -1,9 +1,9 @@
 const constructorEnforcer = Symbol();
 
-export default class Note {
+export default class PitchClass {
     constructor(enforcer, number) {
         if (enforcer !== constructorEnforcer) {
-            throw 'Cannot call constructor of Note';
+            throw 'Cannot call constructor of PitchClass';
         }
         this._number = number;
     }
@@ -13,78 +13,78 @@ export default class Note {
     }
 
     static get C() {
-        return new Note(constructorEnforcer, 0);
+        return new PitchClass(constructorEnforcer, 0);
     }
 
     static get CS() {
-        return new Note(constructorEnforcer, 1);
+        return new PitchClass(constructorEnforcer, 1);
     }
 
     static get DF() {
-        return new Note(constructorEnforcer, 1);
+        return new PitchClass(constructorEnforcer, 1);
     }
 
     static get D() {
-        return new Note(constructorEnforcer, 2);
+        return new PitchClass(constructorEnforcer, 2);
     }
 
     static get DS() {
-        return new Note(constructorEnforcer, 3);
+        return new PitchClass(constructorEnforcer, 3);
     }
 
     static get EF() {
-        return new Note(constructorEnforcer, 3);
+        return new PitchClass(constructorEnforcer, 3);
     }
 
     static get E() {
-        return new Note(constructorEnforcer, 4);
+        return new PitchClass(constructorEnforcer, 4);
     }
 
     static get FF() {
-        return new Note(constructorEnforcer, 4);
+        return new PitchClass(constructorEnforcer, 4);
     }
 
     static get F() {
-        return new Note(constructorEnforcer, 5);
+        return new PitchClass(constructorEnforcer, 5);
     }
 
     static get FS() {
-        return new Note(constructorEnforcer, 6);
+        return new PitchClass(constructorEnforcer, 6);
     }
 
     static get GF() {
-        return new Note(constructorEnforcer, 6);
+        return new PitchClass(constructorEnforcer, 6);
     }
 
     static get G() {
-        return new Note(constructorEnforcer, 7);
+        return new PitchClass(constructorEnforcer, 7);
     }
 
     static get GS() {
-        return new Note(constructorEnforcer, 8);
+        return new PitchClass(constructorEnforcer, 8);
     }
 
     static get AF() {
-        return new Note(constructorEnforcer, 8);
+        return new PitchClass(constructorEnforcer, 8);
     }
 
     static get A() {
-        return new Note(constructorEnforcer, 9);
+        return new PitchClass(constructorEnforcer, 9);
     }
 
     static get AS() {
-        return new Note(constructorEnforcer, 10);
+        return new PitchClass(constructorEnforcer, 10);
     }
 
     static get BF() {
-        return new Note(constructorEnforcer, 10);
+        return new PitchClass(constructorEnforcer, 10);
     }
 
     static get B() {
-        return new Note(constructorEnforcer, 11);
+        return new PitchClass(constructorEnforcer, 11);
     }
 
     static get CF() {
-        return new Note(constructorEnforcer, 11);
+        return new PitchClass(constructorEnforcer, 11);
     }
 }
