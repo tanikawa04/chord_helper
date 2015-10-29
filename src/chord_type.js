@@ -1,3 +1,5 @@
+import Interval from './interval';
+
 const constructorEnforcer = Symbol();
 
 export default class ChordType {
@@ -13,70 +15,70 @@ export default class ChordType {
     }
 
     static get MAJOR() {
-        return new ChordType(constructorEnforcer, [0, 4, 7]);
+        return new ChordType(constructorEnforcer, [Interval.P1, Interval.M3, Interval.P5]);
     }
 
     static get SUSPENDED_FOURTH() {
-        return new ChordType(constructorEnforcer, [0, 5, 7]);
+        return new ChordType(constructorEnforcer, [Interval.P1, Interval.P4, Interval.P5]);
     }
 
     static get AUGUMENT() {
-        return new ChordType(constructorEnforcer, [0, 4, 8]);
+        return new ChordType(constructorEnforcer, [Interval.P1, Interval.M3, Interval.A5]);
     }
 
     static get MINOR() {
-        return new ChordType(constructorEnforcer, [0, 3, 7]);
+        return new ChordType(constructorEnforcer, [Interval.P1, Interval.m3, Interval.P5]);
     }
 
     static get DIMINISH() {
-        return new ChordType(constructorEnforcer, [0, 3, 6]);
+        return new ChordType(constructorEnforcer, [Interval.P1, Interval.m3, Interval.d5]);
     }
 
     static get MAJOR_SEVENTH() {
-        return new ChordType(constructorEnforcer, [0, 4, 7, 11]);
+        return new ChordType(constructorEnforcer, [Interval.P1, Interval.M3, Interval.P5, Interval.M7]);
     }
 
     static get SEVENTH() {
-        return new ChordType(constructorEnforcer, [0, 4, 7, 10]);
+        return new ChordType(constructorEnforcer, [Interval.P1, Interval.M3, Interval.P5, Interval.m7]);
     }
 
     static get SEVENTH_SUSPENDED_FOURTH() {
-        return new ChordType(constructorEnforcer, [0, 5, 7, 10]);
+        return new ChordType(constructorEnforcer, [Interval.P1, Interval.P4, Interval.P5, Interval.m7]);
     }
 
     static get ADD_NINTH() {
-        return new ChordType(constructorEnforcer, [0, 4, 7, 14]);
+        return new ChordType(constructorEnforcer, [Interval.P1, Interval.M3, Interval.P5, Interval.M9]);
     }
 
     static get SIXTH() {
-        return new ChordType(constructorEnforcer, [0, 4, 7, 9]);
+        return new ChordType(constructorEnforcer, [Interval.P1, Interval.M3, Interval.P5, Interval.M6]);
     }
 
     static get AUGUMENT_SEVENTH() {
-        return new ChordType(constructorEnforcer, [0, 4, 8, 10]);
+        return new ChordType(constructorEnforcer, [Interval.P1, Interval.M3, Interval.m6, Interval.m7]);
     }
 
     static get MINOR_SEVENTH() {
-        return new ChordType(constructorEnforcer, [0, 3, 7, 10]);
+        return new ChordType(constructorEnforcer, [Interval.P1, Interval.m3, Interval.P5, Interval.m7]);
     }
 
     static get MINOR_MAJOR_SEVENTH() {
-        return new ChordType(constructorEnforcer, [0, 3, 7, 11]);
+        return new ChordType(constructorEnforcer, [Interval.P1, Interval.m3, Interval.P5, Interval.M7]);
     }
 
     static get MINOR_ADD_NINTH() {
-        return new ChordType(constructorEnforcer, [0, 3, 7, 14]);
+        return new ChordType(constructorEnforcer, [Interval.P1, Interval.m3, Interval.P5, Interval.M9]);
     }
 
     static get MINOR_SIXTH() {
-        return new ChordType(constructorEnforcer, [0, 3, 7, 9]);
+        return new ChordType(constructorEnforcer, [Interval.P1, Interval.m3, Interval.P5, Interval.M6]);
     }
 
     static get HALF_DIMINISH() {
-        return new ChordType(constructorEnforcer, [0, 3, 6, 10]);
+        return new ChordType(constructorEnforcer, [Interval.P1, Interval.m3, Interval.d5, Interval.m7]);
     }
 
     static get DIMINISH_SEVENTH() {
-        return new ChordType(constructorEnforcer, [0, 3, 6, 9]);
+        return new ChordType(constructorEnforcer, [Interval.P1, Interval.m3, Interval.d5, Interval.d7]);
     }
 }
