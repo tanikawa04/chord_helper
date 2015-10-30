@@ -11,7 +11,7 @@ export default class ChordType {
     }
 
     get semitones() {
-        return this._semitones;
+        return [...this._semitones];
     }
 
     static get MAJOR() {
