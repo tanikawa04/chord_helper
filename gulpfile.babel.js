@@ -2,6 +2,8 @@
 
 import gulp from 'gulp';
 import webpack from 'webpack-stream';
+import snakeparser from 'gulp-snakeparser';
+import runSequence from 'run-sequence';
 import plumber from 'gulp-plumber';
 
 import webpackConfig from './webpack.config';
@@ -13,8 +15,24 @@ gulp.task('webpack', () => {
         .pipe(gulp.dest('./dist/'));
 });
 
+gulp.task('generate-parser', () => {
+    gulp.src('./src/grammer/*.sg')
+        .pipe(plumber())
+        .pipe(snakeparser())
+        .pipe(gulp.dest('./src/'));
+});
+
+gulp.task('snakeparser', callback => {
+    runSequence(
+        'generate-parser',
+        'webpack',
+        callback
+    );
+});
+
 gulp.task('watch', () => {
     gulp.watch('./src/*.js', ['webpack']);
+    gulp.watch('./src/grammer/*.sg', ['snakeparser']);
 });
 
 gulp.task('default', ['webpack']);
