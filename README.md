@@ -2,10 +2,12 @@
 
 Chord Helper は JavaScript 上でコード（Chord / 和音）を扱うためのライブラリです。現在はコードのパース機能のみを提供しています。
 
+
 ## Download
 
 - [chord_helper.js](http://diatonic.codes/lib/chord_helper.js)
 - [chord_helper.min.js](http://diatonic.codes/lib/chord_helper.min.js)
+
 
 ## Usage
 
@@ -26,7 +28,7 @@ ChordHelper.parseChord('CM7').toNotes();    // => [12, 24, 28, 31, 35]
 // オートボイシングモード
 ChordHelper.setConfig({
     includesBass: true,
-    autoVoiceing: true,
+    autoVoicing: true,
     centerNote: 60
 });
 
@@ -34,9 +36,18 @@ ChordHelper.parseChord('F#m/A').toObj();    // => {root: 'F#', type: 'MINOR', ba
 ChordHelper.parseChord('F#m/A').toNotes();  // => [45, 57, 61, 66]
 ```
 
+
 ## ChordHelper.parseChord
 
 コードをパースするメソッドです。引数で渡した文字列をパースします。パースの戻り値に `toObj` メソッドまたは `toNotes` メソッドをチェインすることで、結果を取得します。なお、パースに失敗した場合は例外オブジェクト `ChordParseError` をスローします。
+
+### toObj メソッド
+
+ルート (root)、コードタイプ (type)、ベース (bass) をプロパティにもつオブジェクトを返却します。
+
+### toNotes メソッド
+
+MIDI ノートナンバーの配列を返却します。
 
 ### パース可能な文字
 
@@ -54,6 +65,13 @@ ChordHelper.parseChord('F#m/A').toNotes();  // => [45, 57, 61, 66]
 - 分数コードのセパレータ
     - /, on
 
+### パース可能なコードタイプ
+
+- 3和音
+    - MAJOR, SUSPENDED_FOURTH, AUGUMENT, MINOR, DIMINISH
+- 4和音
+    - MAJOR_SEVENTH, SEVENTH, SEVENTH_SUSPENDED_FOURTH, ADD_NINTH, SIXTH, AUGUMENT_SEVENTH, MINOR_MAJOR_SEVENTH, MINOR_ADD_NINTH, MINOR_SIXTH, HALF_DIMINISH, DIMINISH_SEVENTH
+
 
 ## ChordHelper.setConfig の項目
 
@@ -61,21 +79,25 @@ ChordHelper.parseChord('F#m/A').toNotes();  // => [45, 57, 61, 66]
 
 ### includesBass
 
+デフォルト値: `false`
+
 ベースノートを付加するかを指定します。`true` の場合はベースノートを付加し、 `false` の場合は付加しません。
 
 ### autoVoicing
+
+デフォルト値: `false`
 
 `centerNote` の値に応じたコードの転回を許可するかを指定します。 `true` の場合は `centerNote` の値を中心にコードがボイシングされ、基本形・転回形の判断が自動的に行われます。 `false` の場合は、`lowerBound` の値よりも上の音域で、基本形のコードがボイシングされます。
 
 ### centerNote
 
-`autoVoicing` が `true` の場合のみ有効
+`autoVoicing` が `true` の場合のみ有効、デフォルト値: `60`
 
 コードボイシングの中心となるノートナンバーを指定します。
 
 ### lowerBound
 
-`autoVoicing` が `false` の場合のみ有効
+`autoVoicing` が `false` の場合のみ有効、デフォルト値: `60`
 
 コードの最低音の高さを指定します。この値よりも上の音域でコードの基本形がボイシングされます。ただし、 `lowerBound` はコードの基準値であり、ベースノートは除外されます。つまり、ベースノートの音の高さについては `lowerBound` よりも下になる場合があります。
 
