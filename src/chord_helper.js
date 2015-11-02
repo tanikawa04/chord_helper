@@ -5,7 +5,11 @@ import parseChord from './parse_chord';
 
 export default class ChordHelper {
     static parseChord(str) {
-        return new _Chord(parseChord(str));
+        try {
+            return new _Chord(parseChord(str));
+        } catch (e) {
+            throw new ChordParseError('Failed to parse chord \'' + str + '\'');
+        }
     }
 
     static setConfig(config) {
@@ -28,5 +32,13 @@ class _Chord {
         const type = ChordType[obj.type];
         const bass = (obj.bass === '') ? root : PitchClass[obj.bass.replace('#', 'S').replace('b', 'F')];
         return new Chord(root, type, bass).getNotes();
+    }
+}
+
+class ChordParseError extends Error {
+    constructor(message) {
+        super();
+        this.name = this.constructor.name;
+        this.message = message;
     }
 }
