@@ -2,6 +2,9 @@
 
 import gulp from 'gulp';
 import webpack from 'webpack-stream';
+import filter from 'gulp-filter';
+import uglify from 'gulp-uglify';
+import rename from 'gulp-rename';
 import snakeparser from 'gulp-snakeparser';
 import runSequence from 'run-sequence';
 import plumber from 'gulp-plumber';
@@ -12,6 +15,12 @@ gulp.task('webpack', () => {
     gulp.src('./src/*.js')
         .pipe(plumber())
         .pipe(webpack(webpackConfig))
+        .pipe(gulp.dest('./dist/'))
+        .pipe(filter('**/*.js'))
+        .pipe(uglify())
+        .pipe(rename({
+            extname: '.min.js'
+        }))
         .pipe(gulp.dest('./dist/'));
 });
 
