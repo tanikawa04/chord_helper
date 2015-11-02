@@ -1,0 +1,152 @@
+{
+    function check(seq, tensions) {
+        var i = 0, j = 0;
+        while (seq[i] && tensions[j])
+            if (seq[i] === tensions[j++])
+                i += 1;
+        return !seq[i];
+    }
+}
+
+start = chord
+// start = search<chord>
+
+chord
+    =
+    {
+        root: `root
+        quality
+        bass: (slash `bass | \ '')
+    }
+
+root
+    = @(pitchClass ?accidental) -> { return $.join('') }
+
+quality
+    =   type: ('6' \ 'MAJOR_SIXTH')
+        space
+        tension: @?tension -? { return check($, ['9', '#11']) }
+    |   type: ('7' \ 'SEVENTH')
+        space
+        tension: @?tension -? { return check($, ['b9', '9', '#9', '#11', 'b13', '13']) }
+    |   type: (major '7' \ 'MAJOR_SEVENTH')
+        space
+        tension: @?tension -? { return check($, ['9', '#11', '13']) }
+    |   type: ('add9' \ 'ADD_NINTH')
+        space
+        tension: @?tension -? { return check($, []) }
+    |   type: ('sus4' \ 'SUSPENDED_FOURTH')
+        space
+        tension: @?tension -? { return check($, []) }
+    |   type: ('7sus4' \ 'SEVENTH_SUSPENDED_FOURTH')
+        space
+        tension: @?tension -? { return check($, ['9', '13']) }
+    |   type: (minor '6' \ 'MINOR_SIXTH')
+        space
+        tension: @?tension -? { return check($, ['9', '11']) }
+    |   type: (minor '7' \ 'MINOR_SEVENTH')
+        space
+        tension: @?tension -? { return check($, ['9', '11', '13']) }
+    |   type: (minor major '7' \ 'MINOR_MAJOR_SEVENTH')
+        space
+        tension: @?tension -? { return check($, ['9', '11', '13']) }
+    |   type: (?minor 'add9' \ 'MINOR_ADD_NINTH')
+        space
+        tension: @?tension -? { return check($, []) }
+    |   type: (minor \ 'MINOR')
+        space
+        tension: @?tension -? { return check($, []) }
+    |   type: (augument \ 'AUGUMENT_SEVENTH')
+        space
+        tension: @?tension -? { return check($, ['9', '#11']) }
+    |   type: (augument \ 'AUGUMENT')
+        space
+        tension: @?tension -? { return check($, []) }
+    |   type: (diminish '7' \ 'DIMINISH_SEVENTH')
+        space
+        tension: @?tension -? { return check($, []) }
+    |   type: (half_diminish \ 'HALF_DIMINISH')
+        space
+        tension: @?tension -? { return check($, ['9', '11', 'b13']) }
+    |   type: (diminish \ 'DIMINISH')
+        space
+        tension: @?tension -? { return check($, []) }
+    |   type: (?major \ 'MAJOR')
+        space
+        tension: @?tension -? { return check($, []) }
+
+bass
+    =  @(pitchClass ?accidental) -> { return $.join('') }
+
+pitchClass
+    = `[A-G]
+
+accidental
+    = '♯'   \ '#'
+    | '＃'  \ '#'
+    | '#'   \ '#'
+    | '♭'   \ 'b'
+    | 'b'   \ 'b'
+
+major
+    = 'M'
+    | '△'
+    | 'maj'
+
+minor
+    = 'm'
+    | '-'
+    | 'min'
+
+augument
+    = 'aug'
+    | '+'
+
+diminish
+    = 'dim'
+    | '○'
+
+half_diminish
+    = 'φ'
+
+tension
+    =
+    '('
+    +(tn_all delimiter)
+    ')'
+
+tn_all
+    = itv_flat '9'      \ 'b9'
+    | '9'               \ '9'
+    | itv_sharp '9'     \ '#9'
+    | '11'              \ '11'
+    | itv_sharp '11'    \ '#11'
+    | itv_flat '13'     \ 'b13'
+    | '13'              \ '13'
+
+itv_sharp
+    = '♯'
+    | '＃'
+    | '#'
+    | '+'
+    | '＋'
+
+itv_flat
+    = '♭'
+    | 'b'
+    | '-'
+    | '−'
+
+delimiter
+    = &')'
+    | ', '
+    | ','
+    | ' '
+
+slash
+    = space ('/' | '／' | 'on') space
+
+space
+    = *' '
+
+// search<x> = @(*(!x .) *(x *(!x .)))
