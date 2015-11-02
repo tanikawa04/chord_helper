@@ -23,6 +23,9 @@ class _Chord {
     }
 
     toObj() {
+        delete this._obj.tension;   // テンションノートへの対応が不十分なため暫定的に削除
+        this._obj.bass = (this._obj.bass === '') ?
+            this._obj.root : this._obj.bass.replace('#', 'S').replace('b', 'F');
         return this._obj;
     }
 
