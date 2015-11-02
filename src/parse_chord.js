@@ -25,21 +25,23 @@ module.exports = (function() {
     }
 
 
-		function mod$0($) { return check($, ['9', '#11']) };
+		function mod$0($) { return $.join('') };
 
-		function mod$1($) { return check($, ['b9', '9', '#9', '#11', 'b13', '13']) };
+		function mod$1($) { return check($, ['9', '#11']) };
 
-		function mod$2($) { return check($, ['9', '#11', '13']) };
+		function mod$2($) { return check($, ['b9', '9', '#9', '#11', 'b13', '13']) };
 
-		function mod$3($) { return check($, []) };
+		function mod$3($) { return check($, ['9', '#11', '13']) };
 
-		function mod$4($) { return check($, ['9', '13']) };
+		function mod$4($) { return check($, []) };
 
-		function mod$5($) { return check($, ['9', '11']) };
+		function mod$5($) { return check($, ['9', '13']) };
 
-		function mod$6($) { return check($, ['9', '11', '13']) };
+		function mod$6($) { return check($, ['9', '11']) };
 
-		function mod$7($) { return check($, ['9', '11', 'b13']) };
+		function mod$7($) { return check($, ['9', '11', '13']) };
+
+		function mod$8($) { return check($, ['9', '11', 'b13']) };
 
 		function rule$start() {
 			var pos0 = $pos, objsLen0 = $objsLen;
@@ -47,7 +49,7 @@ module.exports = (function() {
 		};
 
 		function rule$chord() {
-			var key = $pos * 16 + 0, pos0 = $pos, objsLen0 = $objsLen;
+			var key = $pos * 18 + 0, pos0 = $pos, objsLen0 = $objsLen;
 			if ($readMemo(key)) return;
 			rule$root();
 			if ($pos !== -1) {
@@ -96,29 +98,30 @@ module.exports = (function() {
 		};
 
 		function rule$root() {
-			var key = $pos * 16 + 1, pos0 = $pos, objsLen0 = $objsLen;
+			var key = $pos * 18 + 1, pos0 = $pos, objsLen0 = $objsLen;
 			if ($readMemo(key)) return;
-			var c = $input.charCodeAt($pos);
-			if (65 <= c && c <= 71)
-				$pos += 1;
-			else
-				$matchingFail("[A-G]");
+			rule$pitchClass();
 			if ($pos !== -1) {
-				var pos1 = $pos;
-				if (/[\u266f\uff03#\u266db]/.test($input.charAt($pos)))
-					$pos += 1;
-				else
-					$matchingFail("[\\u266f\\uff03#\\u266db]");
+				var pos1 = $pos, objsLen1 = $objsLen;
+				rule$accidental();
 				if ($pos === -1) {
 					$pos = pos1;
-					$objsLen = objsLen0;
+					$objsLen = objsLen1;
 				}
+			}
+			if ($pos !== -1) {
+				$objs[objsLen0] = $objs.slice(objsLen0, $objsLen);
+				$objsLen = objsLen0 + 1;
+			}
+			if ($pos !== -1) {
+				$objs[objsLen0] = mod$0($objs[objsLen0]);
+				$objsLen = objsLen0 + 1;
 			}
 			$writeMemo(key, $pos !== -1 && $objs.slice(objsLen0, $objsLen));
 		};
 
 		function rule$quality() {
-			var key = $pos * 16 + 2, pos0 = $pos, objsLen0 = $objsLen;
+			var key = $pos * 18 + 2, pos0 = $pos, objsLen0 = $objsLen;
 			if ($readMemo(key)) return;
 			if ($input.charCodeAt($pos) === 54)
 				$pos += 1;
@@ -147,7 +150,7 @@ module.exports = (function() {
 						$objs[objsLen1] = $objs.slice(objsLen1, $objsLen);
 						$objsLen = objsLen1 + 1;
 					}
-					if ($pos !== -1 && !mod$0($objs[objsLen1])) {
+					if ($pos !== -1 && !mod$1($objs[objsLen1])) {
 						$pos = pos1;
 						$matchingFail("a guarded expression");
 					}
@@ -189,7 +192,7 @@ module.exports = (function() {
 							$objs[objsLen1] = $objs.slice(objsLen1, $objsLen);
 							$objsLen = objsLen1 + 1;
 						}
-						if ($pos !== -1 && !mod$1($objs[objsLen1])) {
+						if ($pos !== -1 && !mod$2($objs[objsLen1])) {
 							$pos = pos1;
 							$matchingFail("a guarded expression");
 						}
@@ -234,7 +237,7 @@ module.exports = (function() {
 								$objs[objsLen1] = $objs.slice(objsLen1, $objsLen);
 								$objsLen = objsLen1 + 1;
 							}
-							if ($pos !== -1 && !mod$2($objs[objsLen1])) {
+							if ($pos !== -1 && !mod$3($objs[objsLen1])) {
 								$pos = pos1;
 								$matchingFail("a guarded expression");
 							}
@@ -276,7 +279,7 @@ module.exports = (function() {
 									$objs[objsLen1] = $objs.slice(objsLen1, $objsLen);
 									$objsLen = objsLen1 + 1;
 								}
-								if ($pos !== -1 && !mod$3($objs[objsLen1])) {
+								if ($pos !== -1 && !mod$4($objs[objsLen1])) {
 									$pos = pos1;
 									$matchingFail("a guarded expression");
 								}
@@ -318,7 +321,7 @@ module.exports = (function() {
 										$objs[objsLen1] = $objs.slice(objsLen1, $objsLen);
 										$objsLen = objsLen1 + 1;
 									}
-									if ($pos !== -1 && !mod$3($objs[objsLen1])) {
+									if ($pos !== -1 && !mod$4($objs[objsLen1])) {
 										$pos = pos1;
 										$matchingFail("a guarded expression");
 									}
@@ -360,7 +363,7 @@ module.exports = (function() {
 											$objs[objsLen1] = $objs.slice(objsLen1, $objsLen);
 											$objsLen = objsLen1 + 1;
 										}
-										if ($pos !== -1 && !mod$4($objs[objsLen1])) {
+										if ($pos !== -1 && !mod$5($objs[objsLen1])) {
 											$pos = pos1;
 											$matchingFail("a guarded expression");
 										}
@@ -405,7 +408,7 @@ module.exports = (function() {
 												$objs[objsLen1] = $objs.slice(objsLen1, $objsLen);
 												$objsLen = objsLen1 + 1;
 											}
-											if ($pos !== -1 && !mod$5($objs[objsLen1])) {
+											if ($pos !== -1 && !mod$6($objs[objsLen1])) {
 												$pos = pos1;
 												$matchingFail("a guarded expression");
 											}
@@ -450,7 +453,7 @@ module.exports = (function() {
 													$objs[objsLen1] = $objs.slice(objsLen1, $objsLen);
 													$objsLen = objsLen1 + 1;
 												}
-												if ($pos !== -1 && !mod$6($objs[objsLen1])) {
+												if ($pos !== -1 && !mod$7($objs[objsLen1])) {
 													$pos = pos1;
 													$matchingFail("a guarded expression");
 												}
@@ -498,7 +501,7 @@ module.exports = (function() {
 														$objs[objsLen1] = $objs.slice(objsLen1, $objsLen);
 														$objsLen = objsLen1 + 1;
 													}
-													if ($pos !== -1 && !mod$6($objs[objsLen1])) {
+													if ($pos !== -1 && !mod$7($objs[objsLen1])) {
 														$pos = pos1;
 														$matchingFail("a guarded expression");
 													}
@@ -547,7 +550,7 @@ module.exports = (function() {
 															$objs[objsLen1] = $objs.slice(objsLen1, $objsLen);
 															$objsLen = objsLen1 + 1;
 														}
-														if ($pos !== -1 && !mod$3($objs[objsLen1])) {
+														if ($pos !== -1 && !mod$4($objs[objsLen1])) {
 															$pos = pos1;
 															$matchingFail("a guarded expression");
 														}
@@ -586,7 +589,7 @@ module.exports = (function() {
 																$objs[objsLen1] = $objs.slice(objsLen1, $objsLen);
 																$objsLen = objsLen1 + 1;
 															}
-															if ($pos !== -1 && !mod$3($objs[objsLen1])) {
+															if ($pos !== -1 && !mod$4($objs[objsLen1])) {
 																$pos = pos1;
 																$matchingFail("a guarded expression");
 															}
@@ -625,7 +628,7 @@ module.exports = (function() {
 																	$objs[objsLen1] = $objs.slice(objsLen1, $objsLen);
 																	$objsLen = objsLen1 + 1;
 																}
-																if ($pos !== -1 && !mod$0($objs[objsLen1])) {
+																if ($pos !== -1 && !mod$1($objs[objsLen1])) {
 																	$pos = pos1;
 																	$matchingFail("a guarded expression");
 																}
@@ -664,7 +667,7 @@ module.exports = (function() {
 																		$objs[objsLen1] = $objs.slice(objsLen1, $objsLen);
 																		$objsLen = objsLen1 + 1;
 																	}
-																	if ($pos !== -1 && !mod$3($objs[objsLen1])) {
+																	if ($pos !== -1 && !mod$4($objs[objsLen1])) {
 																		$pos = pos1;
 																		$matchingFail("a guarded expression");
 																	}
@@ -709,7 +712,7 @@ module.exports = (function() {
 																			$objs[objsLen1] = $objs.slice(objsLen1, $objsLen);
 																			$objsLen = objsLen1 + 1;
 																		}
-																		if ($pos !== -1 && !mod$3($objs[objsLen1])) {
+																		if ($pos !== -1 && !mod$4($objs[objsLen1])) {
 																			$pos = pos1;
 																			$matchingFail("a guarded expression");
 																		}
@@ -748,7 +751,7 @@ module.exports = (function() {
 																				$objs[objsLen1] = $objs.slice(objsLen1, $objsLen);
 																				$objsLen = objsLen1 + 1;
 																			}
-																			if ($pos !== -1 && !mod$7($objs[objsLen1])) {
+																			if ($pos !== -1 && !mod$8($objs[objsLen1])) {
 																				$pos = pos1;
 																				$matchingFail("a guarded expression");
 																			}
@@ -787,7 +790,7 @@ module.exports = (function() {
 																					$objs[objsLen1] = $objs.slice(objsLen1, $objsLen);
 																					$objsLen = objsLen1 + 1;
 																				}
-																				if ($pos !== -1 && !mod$3($objs[objsLen1])) {
+																				if ($pos !== -1 && !mod$4($objs[objsLen1])) {
 																					$pos = pos1;
 																					$matchingFail("a guarded expression");
 																				}
@@ -830,7 +833,7 @@ module.exports = (function() {
 																						$objs[objsLen1] = $objs.slice(objsLen1, $objsLen);
 																						$objsLen = objsLen1 + 1;
 																					}
-																					if ($pos !== -1 && !mod$3($objs[objsLen1])) {
+																					if ($pos !== -1 && !mod$4($objs[objsLen1])) {
 																						$pos = pos1;
 																						$matchingFail("a guarded expression");
 																					}
@@ -862,7 +865,30 @@ module.exports = (function() {
 		};
 
 		function rule$bass() {
-			var key = $pos * 16 + 3, pos0 = $pos, objsLen0 = $objsLen;
+			var key = $pos * 18 + 3, pos0 = $pos, objsLen0 = $objsLen;
+			if ($readMemo(key)) return;
+			rule$pitchClass();
+			if ($pos !== -1) {
+				var pos1 = $pos, objsLen1 = $objsLen;
+				rule$accidental();
+				if ($pos === -1) {
+					$pos = pos1;
+					$objsLen = objsLen1;
+				}
+			}
+			if ($pos !== -1) {
+				$objs[objsLen0] = $objs.slice(objsLen0, $objsLen);
+				$objsLen = objsLen0 + 1;
+			}
+			if ($pos !== -1) {
+				$objs[objsLen0] = mod$0($objs[objsLen0]);
+				$objsLen = objsLen0 + 1;
+			}
+			$writeMemo(key, $pos !== -1 && $objs.slice(objsLen0, $objsLen));
+		};
+
+		function rule$pitchClass() {
+			var key = $pos * 18 + 4, pos0 = $pos, objsLen0 = $objsLen;
 			if ($readMemo(key)) return;
 			var c = $input.charCodeAt($pos);
 			if (65 <= c && c <= 71)
@@ -870,21 +896,70 @@ module.exports = (function() {
 			else
 				$matchingFail("[A-G]");
 			if ($pos !== -1) {
-				var pos1 = $pos;
-				if (/[\u266f\uff03#\u266db]/.test($input.charAt($pos)))
+				$objs[$objsLen++] = $input.substring(pos0, $pos);
+			}
+			$writeMemo(key, $pos !== -1 && $objs.slice(objsLen0, $objsLen));
+		};
+
+		function rule$accidental() {
+			var key = $pos * 18 + 5, pos0 = $pos, objsLen0 = $objsLen;
+			if ($readMemo(key)) return;
+			if ($input.charCodeAt($pos) === 9839)
+				$pos += 1;
+			else
+				$matchingFail("\"\u266f\"");
+			if ($pos !== -1) {
+				$objs[$objsLen++] = "#";
+			}
+			if ($pos === -1) {
+				$pos = pos0;
+				$objsLen = objsLen0;
+				if ($input.charCodeAt($pos) === 65283)
 					$pos += 1;
 				else
-					$matchingFail("[\\u266f\\uff03#\\u266db]");
+					$matchingFail("\"\uff03\"");
+				if ($pos !== -1) {
+					$objs[$objsLen++] = "#";
+				}
 				if ($pos === -1) {
-					$pos = pos1;
+					$pos = pos0;
 					$objsLen = objsLen0;
+					if ($input.charCodeAt($pos) === 35)
+						$pos += 1;
+					else
+						$matchingFail("\"#\"");
+					if ($pos !== -1) {
+						$objs[$objsLen++] = "#";
+					}
+					if ($pos === -1) {
+						$pos = pos0;
+						$objsLen = objsLen0;
+						if ($input.charCodeAt($pos) === 9837)
+							$pos += 1;
+						else
+							$matchingFail("\"\u266d\"");
+						if ($pos !== -1) {
+							$objs[$objsLen++] = "b";
+						}
+						if ($pos === -1) {
+							$pos = pos0;
+							$objsLen = objsLen0;
+							if ($input.charCodeAt($pos) === 98)
+								$pos += 1;
+							else
+								$matchingFail("\"b\"");
+							if ($pos !== -1) {
+								$objs[$objsLen++] = "b";
+							}
+						}
+					}
 				}
 			}
 			$writeMemo(key, $pos !== -1 && $objs.slice(objsLen0, $objsLen));
 		};
 
 		function rule$major() {
-			var key = $pos * 16 + 4, pos0 = $pos, objsLen0 = $objsLen;
+			var key = $pos * 18 + 6, pos0 = $pos, objsLen0 = $objsLen;
 			if ($readMemo(key)) return;
 			if ($input.charCodeAt($pos) === 77)
 				$pos += 1;
@@ -910,7 +985,7 @@ module.exports = (function() {
 		};
 
 		function rule$minor() {
-			var key = $pos * 16 + 5, pos0 = $pos, objsLen0 = $objsLen;
+			var key = $pos * 18 + 7, pos0 = $pos, objsLen0 = $objsLen;
 			if ($readMemo(key)) return;
 			if ($input.charCodeAt($pos) === 109)
 				$pos += 1;
@@ -936,7 +1011,7 @@ module.exports = (function() {
 		};
 
 		function rule$augument() {
-			var key = $pos * 16 + 6, pos0 = $pos, objsLen0 = $objsLen;
+			var key = $pos * 18 + 8, pos0 = $pos, objsLen0 = $objsLen;
 			if ($readMemo(key)) return;
 			if ($input.substr($pos, 3) === "aug")
 				$pos += 3;
@@ -954,7 +1029,7 @@ module.exports = (function() {
 		};
 
 		function rule$diminish() {
-			var key = $pos * 16 + 7, pos0 = $pos, objsLen0 = $objsLen;
+			var key = $pos * 18 + 9, pos0 = $pos, objsLen0 = $objsLen;
 			if ($readMemo(key)) return;
 			if ($input.substr($pos, 3) === "dim")
 				$pos += 3;
@@ -972,7 +1047,7 @@ module.exports = (function() {
 		};
 
 		function rule$half_diminish() {
-			var key = $pos * 16 + 8, pos0 = $pos, objsLen0 = $objsLen;
+			var key = $pos * 18 + 10, pos0 = $pos, objsLen0 = $objsLen;
 			if ($readMemo(key)) return;
 			if ($input.charCodeAt($pos) === 966)
 				$pos += 1;
@@ -982,7 +1057,7 @@ module.exports = (function() {
 		};
 
 		function rule$tension() {
-			var key = $pos * 16 + 9, pos0 = $pos, objsLen0 = $objsLen;
+			var key = $pos * 18 + 11, pos0 = $pos, objsLen0 = $objsLen;
 			if ($readMemo(key)) return;
 			if ($input.charCodeAt($pos) === 40)
 				$pos += 1;
@@ -1017,7 +1092,7 @@ module.exports = (function() {
 		};
 
 		function rule$tn_all() {
-			var key = $pos * 16 + 10, pos0 = $pos, objsLen0 = $objsLen;
+			var key = $pos * 18 + 12, pos0 = $pos, objsLen0 = $objsLen;
 			if ($readMemo(key)) return;
 			rule$itv_flat();
 			if ($pos !== -1) {
@@ -1108,7 +1183,7 @@ module.exports = (function() {
 		};
 
 		function rule$itv_sharp() {
-			var key = $pos * 16 + 11, pos0 = $pos, objsLen0 = $objsLen;
+			var key = $pos * 18 + 13, pos0 = $pos, objsLen0 = $objsLen;
 			if ($readMemo(key)) return;
 			if ($input.charCodeAt($pos) === 9839)
 				$pos += 1;
@@ -1150,7 +1225,7 @@ module.exports = (function() {
 		};
 
 		function rule$itv_flat() {
-			var key = $pos * 16 + 12, pos0 = $pos, objsLen0 = $objsLen;
+			var key = $pos * 18 + 14, pos0 = $pos, objsLen0 = $objsLen;
 			if ($readMemo(key)) return;
 			if ($input.charCodeAt($pos) === 9837)
 				$pos += 1;
@@ -1184,7 +1259,7 @@ module.exports = (function() {
 		};
 
 		function rule$delimiter() {
-			var key = $pos * 16 + 13, pos0 = $pos, objsLen0 = $objsLen;
+			var key = $pos * 18 + 15, pos0 = $pos, objsLen0 = $objsLen;
 			if ($readMemo(key)) return;
 			$errorMask += 1;
 			if ($input.charCodeAt($pos) === 41)
@@ -1224,7 +1299,7 @@ module.exports = (function() {
 		};
 
 		function rule$slash() {
-			var key = $pos * 16 + 14, pos0 = $pos, objsLen0 = $objsLen;
+			var key = $pos * 18 + 16, pos0 = $pos, objsLen0 = $objsLen;
 			if ($readMemo(key)) return;
 			rule$space();
 			if ($pos !== -1) {
@@ -1257,7 +1332,7 @@ module.exports = (function() {
 		};
 
 		function rule$space() {
-			var key = $pos * 16 + 15, pos0 = $pos, objsLen0 = $objsLen;
+			var key = $pos * 18 + 17, pos0 = $pos, objsLen0 = $objsLen;
 			if ($readMemo(key)) return;
 			var pos1 = $pos, objsLen1 = $objsLen;
 			while (true) {

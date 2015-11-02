@@ -20,7 +20,7 @@ chord
     }
 
 root
-    = [A-G] ?[♯＃#♭b]
+    = @(pitchClass ?accidental) -> { return $.join('') }
 
 quality
     =   type: ('6' \ 'MAJOR_SIXTH')
@@ -76,7 +76,17 @@ quality
         tension: @?tension -? { return check($, []) }
 
 bass
-    = [A-G] ?[♯＃#♭b]
+    =  @(pitchClass ?accidental) -> { return $.join('') }
+
+pitchClass
+    = `[A-G]
+
+accidental
+    = '♯'   \ '#'
+    | '＃'  \ '#'
+    | '#'   \ '#'
+    | '♭'   \ 'b'
+    | 'b'   \ 'b'
 
 major
     = 'M'
