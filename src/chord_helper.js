@@ -38,7 +38,7 @@ class _Chord {
     }
 }
 
-class ChordParseError extends Error {
+export class ChordParseError extends Error {
     constructor(message) {
         super();
         this.name = this.constructor.name;
