@@ -22,7 +22,7 @@ ChordHelper.setConfig({
     lowerBound: 20
 });
 
-ChordHelper.parseChord('CM7').toObj();      // => {root: 'C', type: 'MAJOR_SEVENTH', bass: ''}
+ChordHelper.parseChord('CM7').toObj();      // => {root: 'C', type: 'MAJOR_SEVENTH', bass: 'C'}
 ChordHelper.parseChord('CM7').toNotes();    // => [12, 24, 28, 31, 35]
 
 // オートボイシングモード
