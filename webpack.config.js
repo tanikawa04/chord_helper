@@ -1,8 +1,8 @@
 module.exports = {
-    entry: './src/chord_helper.js',
+    entry: {},
     output: {
         path: __dirname + '/',
-        filename: 'chord_helper.js'
+        filename: '[name].js'
     },
     devtool: '#source-map',
     module: {
