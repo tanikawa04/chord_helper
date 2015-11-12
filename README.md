@@ -1,5 +1,7 @@
 # Chord Helper
 
+[![Build Status](https://travis-ci.org/tanikawa04/chord_helper.svg)](https://travis-ci.org/tanikawa04/chord_helper)
+
 Chord Helper は JavaScript 上でコード（Chord / 和音）を扱うためのライブラリです。現在はコードのパース機能のみを提供しています。
 
 
