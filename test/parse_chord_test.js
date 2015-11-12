@@ -33,17 +33,39 @@ describe('#parseChord()', () => {
         {argv: 'A＃dim7', expected: {root: 'A#', type: 'DIMINISH_SEVENTH', tension: [], bass: ''}}
     ];
 
+    const onChords = [
+        {argv: 'C/G', expected: {root: 'C', type: 'MAJOR', tension: [], bass: 'G'}},
+        {argv: 'C#m on E', expected: {root: 'C#', type: 'MINOR', tension: [], bass: 'E'}}
+    ];
+
+    const invalidChords = ['c△7', 'Xmaj7', 'CM7sus4', 'C7/X'];
+
     triads.forEach(test => {
-        it('should return a valid object of chord ' + test.argv, () => {
+        it(`should return a result parsed from "${test.argv}"`, () => {
             const res = parseChord(test.argv);
             assert.deepEqual(res, test.expected);
         });
     });
 
     tetrads.forEach(test => {
-        it('should return a valid object of chord ' + test.argv, () => {
+        it(`should return a result parsed from "${test.argv}"`, () => {
             const res = parseChord(test.argv);
             assert.deepEqual(res, test.expected);
+        });
+    });
+
+    onChords.forEach(test => {
+        it(`should return a result parsed from "${test.argv}"`, () => {
+            const res = parseChord(test.argv);
+            assert.deepEqual(res, test.expected);
+        });
+    });
+
+    invalidChords.forEach(test => {
+        it(`should throw an error when parsing "${test}"`, () => {
+            assert.throws(() => {
+                parseChord(test);
+            });
         });
     });
 });
