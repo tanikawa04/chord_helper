@@ -1,4 +1,8 @@
+import PitchClass from './pitch_class';
+import ChordType from './chord_type';
 import Interval from './interval';
+import parseChord from './parse_chord';
+import ChordParseError from './chord_parse_error';
 
 let _includesBass = false;
 let _autoVoicing = false;
@@ -13,12 +17,22 @@ export default class Chord {
         this._bass = bass;
     }
 
-    getNotes() {
+    // コードをオブジェクトに変換する
+    toObj() {
+        return {
+            root: this._root.name,
+            type: this._type.name,
+            bass: this._bass.name
+        };
+    }
+
+    // コードをノートナンバーの配列に変換する
+    toNotes() {
         const rootNumber = this._clipNote(this._root.number, _lowerBound, _lowerBound + 11);
         const lbound = _autoVoicing ? _centerNote - 5 : rootNumber;
         const ubound = _autoVoicing ? _centerNote + 6 : rootNumber + Interval.M14;
         const intervals = [...this._type.semitones, ...this._tensions];
-        const chordTones = intervals.map(interval => {
+        const chordTones = intervals.map((interval) => {
             return this._clipNote(interval + rootNumber, lbound, ubound);
         }).sort();
 
@@ -42,6 +56,19 @@ export default class Chord {
             return (note - ubound - 1) % 12 + ubound - 12 + 1;
         } else {
             return note;
+        }
+    }
+
+    // 文字列のコードをパースする
+    static parse(str) {
+        try {
+            const obj = parseChord(str);
+            const root = PitchClass[obj.root.replace('#', 'S').replace('b', 'F')];
+            const type = ChordType[obj.type];
+            const bass = (obj.bass === '') ? root : PitchClass[obj.bass.replace('#', 'S').replace('b', 'F')];
+            return new Chord(root, type, bass);
+        } catch (e) {
+            throw new ChordParseError(`Failed to parse chord "${str}":\n${e}`);
         }
     }
 
