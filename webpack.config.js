@@ -1,5 +1,5 @@
 module.exports = {
-    entry: {chord_helper: './src/chord_helper.js'},
+    entry: {chord_helper: './src/chord_helper.js', chord: './src/chord.js'},
     output: {
         path: __dirname + '/',
         filename: '[name].js'

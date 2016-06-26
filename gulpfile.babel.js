@@ -8,19 +8,27 @@ import rename from 'gulp-rename';
 import snakeparser from 'gulp-snakeparser';
 import runSequence from 'run-sequence';
 import plumber from 'gulp-plumber';
+import babel from 'gulp-babel';
 
 import webpackConfig from './webpack.config';
 
-gulp.task('webpack', () => {
+// gulp.task('webpack', () => {
+//     gulp.src('./src/*.js')
+//         .pipe(plumber())
+//         .pipe(webpack(webpackConfig))
+//         .pipe(gulp.dest('./dist/'))
+//         .pipe(filter('**/*.js'))
+//         .pipe(uglify())
+//         .pipe(rename({
+//             extname: '.min.js'
+//         }))
+//         .pipe(gulp.dest('./dist/'));
+// });
+
+gulp.task('js', () => {
     gulp.src('./src/*.js')
         .pipe(plumber())
-        .pipe(webpack(webpackConfig))
-        .pipe(gulp.dest('./dist/'))
-        .pipe(filter('**/*.js'))
-        .pipe(uglify())
-        .pipe(rename({
-            extname: '.min.js'
-        }))
+        .pipe(babel())
         .pipe(gulp.dest('./dist/'));
 });
 
@@ -31,17 +39,20 @@ gulp.task('generate-parser', () => {
         .pipe(gulp.dest('./src/'));
 });
 
-gulp.task('snakeparser', callback => {
+gulp.task('snakeparser', (callback) => {
     runSequence(
         'generate-parser',
-        'webpack',
+        // 'webpack',
+        'js',
         callback
     );
 });
 
 gulp.task('watch', () => {
-    gulp.watch('./src/*.js', ['webpack']);
+    // gulp.watch('./src/*.js', ['webpack']);
+    gulp.watch('./src/*.js', ['js']);
     gulp.watch('./src/grammer/*.sg', ['snakeparser']);
 });
 
-gulp.task('default', ['webpack']);
+// gulp.task('default', ['webpack']);
+gulp.task('default', ['js']);
